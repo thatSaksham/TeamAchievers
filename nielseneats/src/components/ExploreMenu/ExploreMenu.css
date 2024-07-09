@@ -25,6 +25,10 @@
   overflow-x: scroll;
 }
 
+.explore-menu-list p{
+  text-wrap: nowrap;
+}
+
 
 .explore-menu-list::-webkit-scrollbar{
   display: none;
@@ -36,6 +40,8 @@
   cursor: pointer;
   border-radius: 50%;
   transition: 0.2s;
+  height: 15vh;
+  object-fit: cover;
 }
 
 @media (max-width:1050px){
