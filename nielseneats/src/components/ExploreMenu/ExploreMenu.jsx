@@ -1,8 +1,38 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
+import axios from 'axios';
 import './ExploreMenu.css'
-import { menu_list } from '../../assets/assets'
 
 const ExploreMenu=({category,setCategory})=> {
+
+    const [menu_list, setMenuList] = useState([]);
+  const [loading, isLoading] = useState(true);
+  const [apiError, setApiDError] = useState(false);
+  const fetchData = async () => {
+    try {
+        const response = await axios.get("http://localhost:3000/getmenulist", {
+            headers: {
+                authentication: "Bearer " + localStorage.getItem("token")
+            }
+        })
+        console.log(response);
+        setMenuList(response.data)
+        isLoading(false)
+    } catch (error) {
+        setApiDError(true)
+    }
+  }
+
+  useEffect(() => {
+    fetchData()
+    },[])
+    
+  if (apiError) {
+      return <h1>Something went wrong</h1>
+  }
+  if (loading) {
+      return <h1>Loading...</h1>
+  }
+
   return (
     <div className='explore-menu' id='explore-menu'>
         <h1>Explore our menu</h1>
