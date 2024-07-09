@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 //Connect mongoDB database
-const mongooseURI = "mongodb://127.0.0.1:27017/Nielsen";
+const mongooseURI = "mongodb+srv://admin:nielseneats123@cluster0.seoqady.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 mongoose.connect(mongooseURI);
 
 //user Schema
@@ -108,6 +108,29 @@ app.get('/prods', verifyToken, async (req, res) => {
         res.status(500).send("Products not found");
     }
 });
+
+app.get('/userinfo', verifyToken, async (req, res) => {
+    try {
+      const userId = req.user.userId;
+      const user = await User.findById(userId);
+      
+      if (!user) {
+        return res.status(404).send("User not found"+userId);
+      }
+      
+      res.send(user);
+    } catch (error) {
+      res.status(500).send("Server error");
+    }
+  });
+
+//   app.get('/verifytoken',verifyToken,async(req,res)=>{
+//     try {
+//         const userId = req.user.userId;
+//         const user = await User.findById(userId);
+//         if (!user) {
+//             return res.status(404).send("User not found"+userId);
+//   });
 
 const port = 3000;
 app.listen(port, () => {

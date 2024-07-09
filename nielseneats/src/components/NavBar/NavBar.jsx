@@ -1,17 +1,50 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './NavBar.css';
 import { assets } from '../../assets/assets';
 import {Link} from 'react-router-dom'
 import { StoreContext } from '../../context/StoreContext';
-
+import axios from 'axios'; 
 
 const NavBar = ({setShowLogin}) => {
   
   const [menu,setMenu]=useState("home");
 
-  const {getTotalCartAmount}=useContext(StoreContext)
+  const {getTotalCartAmount}=useContext(StoreContext);
+  const [showUserInfo,setShowUserInfo]=useState(false);
+  const [user,setUser]=useState({});
+  const token = localStorage.getItem("token");
 
+  const fetchUserDetails = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/userinfo", {
+        headers: {
+          Authentication: `Bearer ${token}`,
+        },
+      });
+      setUser(res.data);
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  };
 
+  useEffect(() => {
+    fetchUserDetails();
+  }, []);
+
+  useEffect(() => {
+    if (user.username) {
+      setShowUserInfo(true);
+    } else {
+      setShowUserInfo(false);
+    }
+  }, [user]);
+
+  // useEffect(()=>{
+  //   checkLoggedIn();
+  //   if(showUserInfo){
+  //     setShowLogin(false);
+  //   }
+  // },[])
 
 
   return (
@@ -36,7 +69,7 @@ const NavBar = ({setShowLogin}) => {
           </div>
         </div> 
 
-        <button onClick={()=>setShowLogin(true)}>Sign in</button>
+        {showUserInfo?<button>{user.username}</button>:<button onClick={()=>setShowLogin(true)}>Sign in</button>}
 
       </div>
         

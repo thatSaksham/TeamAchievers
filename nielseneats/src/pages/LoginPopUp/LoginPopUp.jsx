@@ -13,18 +13,15 @@ const LoginPopUp = ({setShowLogin}) => {
 
     const handleUsername =(event) =>{
       setUsername(event.target.value);
-      // console.log(username);
    }
 
    const handleEmail =(event) =>{
     setEmail(event.target.value);
-    console.log(email);
    }
 
    const handlePassword = (event) =>{
       setPassword(event.target.value);
-      console.log(password);
-   } 
+   }
   
    const handleRegisterData  = async (event) =>{
       try{
@@ -53,10 +50,11 @@ const LoginPopUp = ({setShowLogin}) => {
         })
         if(res.status === 200){
             localStorage.setItem("token",res.data);
-            navigate('/');
+            setShowLogin(false);
+            navigate(0);
         }
     } catch (error){
-        setLoginErr(alert("Invalid Credentials"));
+        alert("Invalid Credentials");
     }
  }
     const [currentState,setCurrentState]=useState("Sign up")
