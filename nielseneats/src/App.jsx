@@ -5,7 +5,7 @@ import Home from './pages/Home/Home'
 import Cart from './pages/Cart/Cart'
 import PlaceOrder from './pages/PlaceOrder/PlaceOrder'
 import Footer from './components/Footer/Footer'
-import LoginPopUp from './components/LoginPopUp/LoginPopUp'
+// import LoginPopUp from './components/LoginPopUp/LoginPopUp'
 
 const App = () => {
 
@@ -14,7 +14,7 @@ const App = () => {
   return (
     <>
 
-    {showLogin?<LoginPopUp setShowLogin={setShowLogin}/>:<></>}
+    {/* {showLogin?<LoginPopUp setShowLogin={setShowLogin}/>:<></>} */}
     
     <div className='app'>
       <NavBar setShowLogin={setShowLogin}/>
