@@ -57,11 +57,11 @@ const LoginPopUp = ({setShowLogin}) => {
         alert("Invalid Credentials");
     }
  }
-    const [currentState,setCurrentState]=useState("Sign up")
+    const [currentState,setCurrentState]=useState("Sign Up")
 
   return (
     <div className='login-popup'>
-      <form className="login-popup-container" onSubmit={currentState==='Sign up'?handleRegisterData:handleLoginData}>
+      <form className="login-popup-container" onSubmit={currentState==='Sign Up'?handleRegisterData:handleLoginData}>
         <div className='login-popup-title'>
             <h2>{currentState}</h2>
             <img onClick={()=>setShowLogin(false)} src={assets.cross_icon} alt="" />
@@ -74,7 +74,7 @@ const LoginPopUp = ({setShowLogin}) => {
             <input type="password" placeholder='Password' value={password} onChange={handlePassword} required classname='input' />
         </div>
 
-        <button type='submit'>{currentState==="Sign up"?"Create account":"Login"}</button>
+        <button type='submit'>{currentState==="Sign Up"?"Create account":"Login"}</button>
 
         <div className="login-popup-condition">
           <input type="checkbox" required/>
