@@ -64,8 +64,7 @@ const Cart=()=> {
              <p>delivery fee</p>
              <p>₹{getTotalCartAmount()===0?0:20}</p>
             </div>
-             <hr />
-
+             <hr /> 
             <div className="cart-total-details">
               <b>Total</b>
               <b>₹{getTotalCartAmount()===0?0:getTotalCartAmount()+20}</b>
@@ -75,19 +74,6 @@ const Cart=()=> {
 
         </div>
        
-        <div className="cart-promocode">
-          <div>
-            <p>if you have a promo code , enter it here</p>
-            <div className='cart-promocode-input'>
-              <input type="text" placeholder='promo code' />
-              <button>
-                Submit
-              </button>
-
-            </div>
-          </div>
-        </div>
-
       </div>
       
     </div>

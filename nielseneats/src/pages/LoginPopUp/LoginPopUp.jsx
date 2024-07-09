@@ -24,7 +24,7 @@ const LoginPopUp = ({setShowLogin}) => {
    const handlePassword = (event) =>{
       setPassword(event.target.value);
       console.log(password);
-   }
+   } 
   
    const handleRegisterData  = async (event) =>{
       try{

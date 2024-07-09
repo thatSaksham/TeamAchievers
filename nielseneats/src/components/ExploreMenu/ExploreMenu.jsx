@@ -9,7 +9,7 @@ const ExploreMenu=({category,setCategory})=> {
 
         <p className='explore-menu-text'>Dive into a world of culinary innovation with our chef's special creations, showcasing the finest seasonal ingredients sourced locally and globally.</p>
          
-         <div className="explore-menu-list">
+         <div className="explore-menu-list"> 
             {menu_list.map((item,index)=>{
               return (
               <div onClick={()=>setCategory(prev=>prev===item.menu_name?"All":item.menu_name)} key={index}
@@ -17,7 +17,7 @@ const ExploreMenu=({category,setCategory})=> {
                <img className={category===item.menu_name?"active":""} src={item.menu_image}/>
                <p>{item.menu_name}</p>
                </div>  
-               )  
+               )   
             })}
          </div>
          
