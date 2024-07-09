@@ -11,7 +11,7 @@ const StoreContextProvider = (props) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/prods", {
+      const response = await axios.get("https://teamachievers-1.onrender.com/prods", {
         headers: {
           authentication: "Bearer " + localStorage.getItem("token"),
         },

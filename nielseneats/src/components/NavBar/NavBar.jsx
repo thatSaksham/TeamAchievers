@@ -23,7 +23,7 @@ const NavBar = ({setShowLogin}) => {
 
   const fetchUserDetails = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/userinfo", {
+      const res = await axios.get("https://teamachievers-1.onrender.com/userinfo", {
         headers: {
           Authentication: `Bearer ${token}`,
         },

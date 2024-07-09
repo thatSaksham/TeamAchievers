@@ -26,7 +26,7 @@ const LoginPopUp = ({setShowLogin}) => {
    const handleRegisterData  = async (event) =>{
       try{
           event.preventDefault();
-          const response =await axios.post("http://localhost:3000/register",{
+          const response =await axios.post("https://teamachievers-1.onrender.com/register",{
               username:username,
               password:password,
               email:email,
@@ -44,7 +44,7 @@ const LoginPopUp = ({setShowLogin}) => {
    const handleLoginData = async (event) => {
     try{
         event.preventDefault();
-        const res = await axios.post("http://localhost:3000/login",{
+        const res = await axios.post("https://teamachievers-1.onrender.com/login",{
             username:username,
             password:password,
         })

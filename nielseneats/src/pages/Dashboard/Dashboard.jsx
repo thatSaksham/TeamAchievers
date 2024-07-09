@@ -18,7 +18,7 @@ function Dashboard() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/prods');
+      const response = await axios.get('https://teamachievers-1.onrender.com/prods');
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -29,7 +29,7 @@ function Dashboard() {
     e.preventDefault();
     try {
       const newProduct = { name, description, price, category, image };
-      const response = await axios.post('http://localhost:3000/prod', newProduct, {
+      const response = await axios.post('https://teamachievers-1.onrender.com/prod', newProduct, {
         headers: { authentication: 'Bearer ' + localStorage.getItem('token') }
       });
       setProducts([...products, response.data]);
@@ -43,7 +43,7 @@ function Dashboard() {
     e.preventDefault();
     try {
       const updatedProduct = { name, description, price, category, image };
-      const response = await axios.put(`http://localhost:3000/${currentProduct._id}`, updatedProduct);
+      const response = await axios.put(`https://teamachievers-1.onrender.com/${currentProduct._id}`, updatedProduct);
       setProducts(products.map(product => (product._id === currentProduct._id ? response.data : product)));
       clearForm();
     } catch (error) {
@@ -53,7 +53,7 @@ function Dashboard() {
 
   const handleDeleteProduct = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/${id}`);
+      await axios.delete(`https://teamachievers-1.onrender.com/${id}`);
       setProducts(products.filter(product => product._id !== id));
     } catch (error) {
       console.error('Error deleting product:', error);

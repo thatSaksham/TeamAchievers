@@ -9,7 +9,7 @@ const ExploreMenu=({category,setCategory})=> {
   const [apiError, setApiDError] = useState(false);
   const fetchData = async () => {
     try {
-        const response = await axios.get("http://localhost:3000/getmenulist", {
+        const response = await axios.get("https://teamachievers-1.onrender.com/getmenulist", {
             headers: {
                 authentication: "Bearer " + localStorage.getItem("token")
             }
