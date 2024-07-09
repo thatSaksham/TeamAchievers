@@ -87,7 +87,9 @@
     border-bottom: 0px;
     border-radius: 10px;
     width: min-content;
+    text-wrap: nowrap;
     overflow: hidden;
+    transform: translateX(7px);
   }
   
   .menu > li {

@@ -43,7 +43,9 @@ const NavBar = ({setShowLogin}) => {
   
 
   useEffect(() => {
-    fetchUserDetails();
+    if(token){
+      fetchUserDetails();
+    }
   }, []);
 
   useEffect(() => {
