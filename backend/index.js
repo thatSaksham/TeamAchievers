@@ -26,8 +26,17 @@ const ProductSchema = new mongoose.Schema({
     name: String,
     description: String,
     price: Number,    
+    category: String,
+    image: String
 });
 const Product = new mongoose.model('Product', ProductSchema);
+
+const MenuListSchema = new mongoose.Schema({
+    menu_name: String,
+    menu_image: String,
+});
+
+const MenuList = new mongoose.model('menu_list', MenuListSchema);
 
 //verify token middleware
 function verifyToken(req, res, next) {
@@ -100,12 +109,21 @@ app.delete('/:id', (req, res) => {
 });
 
 //get all product
-app.get('/prods', verifyToken, async (req, res) => {
+app.get('/prods', async (req, res) => {
     try {
         const products = await Product.find();
         res.send(products);
     } catch (error) {
         res.status(500).send("Products not found");
+    }
+});
+
+app.get('/getmenulist', async (req, res) => {
+    try {
+        const menu_list = await MenuList.find();
+        res.send(menu_list);
+    } catch (error) {
+        res.status(500).send("Menu List not found");
     }
 });
 
