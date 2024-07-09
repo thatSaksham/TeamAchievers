@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './NavBar.css';
 import { assets } from '../../assets/assets';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { StoreContext } from '../../context/StoreContext';
 import axios from 'axios'; 
 
 const NavBar = ({setShowLogin}) => {
+
+  const navigate = useNavigate();
   
   const [menu,setMenu]=useState("home");
 
@@ -13,6 +15,11 @@ const NavBar = ({setShowLogin}) => {
   const [showUserInfo,setShowUserInfo]=useState(false);
   const [user,setUser]=useState({});
   const token = localStorage.getItem("token");
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(!open);
+  };
 
   const fetchUserDetails = async () => {
     try {
@@ -27,6 +34,14 @@ const NavBar = ({setShowLogin}) => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    navigate('/');
+    navigate(0);
+  };
+  
+
   useEffect(() => {
     fetchUserDetails();
   }, []);
@@ -38,14 +53,6 @@ const NavBar = ({setShowLogin}) => {
       setShowUserInfo(false);
     }
   }, [user]);
-
-  // useEffect(()=>{
-  //   checkLoggedIn();
-  //   if(showUserInfo){
-  //     setShowLogin(false);
-  //   }
-  // },[])
-
 
   return (
     <div className='navbar'>
@@ -59,17 +66,31 @@ const NavBar = ({setShowLogin}) => {
       </ul>
 
       <div className='navbar-right'>
-        <img src={assets.search_icon} height="27px" alt=""/>
+        <img src={assets.search_icon} style={{ maxHeight: '32px' }} alt=""/>
 
         <div className="navbar-search-icon">
-            <Link to='/cart'><img src={assets.basket_icon} height="27px" alt=""/></Link>
+            <Link to='/cart'><img src={assets.basket_icon} style={{ maxHeight: '32px' }} alt=""/></Link>
 
           <div className={getTotalCartAmount()===0?"":"dot"}>
 
           </div>
         </div> 
 
-        {showUserInfo?<button>{user.username}</button>:<button onClick={()=>setShowLogin(true)}>Sign in</button>}
+        {showUserInfo?
+        <div className="dropdown">
+        <button onClick={handleOpen}>{user.username}</button>
+        {open ? (
+          <ul className="menu">
+            <li className="menu-item">
+              {user.isAdmin?<Link to='/dashboard'><button className='dropbutton'>Dashboard</button></Link>:<button className='dropbutton'>Orders</button>}
+            </li>
+            <li className="menu-item">
+              <button className='dropbutton' onClick={handleLogout}>Sign Out</button>
+            </li>
+          </ul>
+        ) : null}
+      </div>
+        :<button onClick={()=>setShowLogin(true)}>Sign in</button>}
 
       </div>
         

@@ -124,14 +124,6 @@ app.get('/userinfo', verifyToken, async (req, res) => {
     }
   });
 
-//   app.get('/verifytoken',verifyToken,async(req,res)=>{
-//     try {
-//         const userId = req.user.userId;
-//         const user = await User.findById(userId);
-//         if (!user) {
-//             return res.status(404).send("User not found"+userId);
-//   });
-
 const port = 3000;
 app.listen(port, () => {
     console.log(`Listening to port no. ${port}`);
