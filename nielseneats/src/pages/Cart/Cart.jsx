@@ -33,9 +33,9 @@ const Cart=()=> {
                   
                   <img src={item.image} alt="" />
                     <p>{item.name}</p>
-                    <p>${item.price}</p>
+                    <p>₹{item.price}</p>
                     <p>{cartItems[item._id]}</p>
-                    <p>${item.price*cartItems[item._id]}</p>
+                    <p>₹{item.price*cartItems[item._id]}</p>
                     <p onClick={()=>removeFromCart(item._id)} className='cross'>x</p>
                 </div>
 
@@ -54,7 +54,7 @@ const Cart=()=> {
           <div>
             <div className="cart-total-details">
               <p>subtotal</p>
-              <p>${getTotalCartAmount()}</p>
+              <p>₹{getTotalCartAmount()}</p>
 
             </div>
 
@@ -62,13 +62,13 @@ const Cart=()=> {
 
             <div className="cart-total-details">
              <p>delivery fee</p>
-             <p>${getTotalCartAmount()===0?0:2}</p>
+             <p>₹{getTotalCartAmount()===0?0:20}</p>
             </div>
              <hr />
 
             <div className="cart-total-details">
               <b>Total</b>
-              <b>${getTotalCartAmount()===0?0:getTotalCartAmount()+2}</b>
+              <b>₹{getTotalCartAmount()===0?0:getTotalCartAmount()+20}</b>
             </div>
           </div>
           <button onClick={()=>navigate('/order')}>Proceed to checkout</button>
@@ -77,7 +77,7 @@ const Cart=()=> {
        
         <div className="cart-promocode">
           <div>
-            <p>if you have a promo code , enter it bhai</p>
+            <p>if you have a promo code , enter it here</p>
             <div className='cart-promocode-input'>
               <input type="text" placeholder='promo code' />
               <button>
