@@ -16,7 +16,6 @@ mongoose.connect(mongooseURI);
 const UserSchema = new mongoose.Schema({
     username: String,
     password: String,
-    phone_no: Number,
     email: String,
     isAdmin: Boolean,
 });
@@ -46,7 +45,7 @@ function verifyToken(req, res, next) {
 app.post('/register', async (req, res) => {
     try {
         const hashedPass = bcrypt.hashSync(req.body.password, 8);
-        const user = new User({ username: req.body.username, password: hashedPass, phone_no: req.body.phone_no, email: req.body.email, isAdmin: false});
+        const user = new User({ username: req.body.username, password: hashedPass, email: req.body.email, isAdmin: false});
         await user.save();
         res.status(201).send("User registered successfully");
     } catch (error) {
