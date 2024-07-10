@@ -7,7 +7,14 @@ const StoreContextProvider = (props) => {
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState(false);
-  const [cartItems, setCartItems] = useState({});
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCart = localStorage.getItem("cartItems"); // Added line
+    return savedCart ? JSON.parse(savedCart) : {}; // Added line
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems)); // Added line
+  }, [cartItems]);
 
   const fetchData = async () => {
     try {
