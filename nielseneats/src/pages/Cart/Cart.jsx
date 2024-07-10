@@ -1,11 +1,41 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Cart.css';
 import { StoreContext } from '../../context/StoreContext';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Cart = () => {
   const { cartItems, food_list, removeFromCart, addToCart, getTotalCartAmount } = useContext(StoreContext);
   const navigate = useNavigate();
+  const [user,setUser]=useState({});
+  const token = localStorage.getItem("token");
+
+  const fetchUserDetails = async () => {
+    try {
+      const res = await axios.get("https://teamachievers-1.onrender.com/userinfo", {
+        headers: {
+          Authentication: `Bearer ${token}`,
+        },
+      });
+      setUser(res.data);
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  };
+
+  useEffect(() => {
+    if(token){
+      fetchUserDetails();
+    }
+  }, []);
+const handleCheckout = ()=>{
+  console.log(user);
+  if (user.username){
+    (navigate('/order'));
+  } else {
+    alert('Login to checkout')
+  }
+}
 
   return (
     <div className='cart'>
@@ -67,7 +97,7 @@ const Cart = () => {
               <b>₹{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 20}</b>
             </div>
           </div>
-          <button onClick={() => navigate('/order')}>Proceed to Checkout</button>
+          <button onClick={handleCheckout}>Proceed to Checkout</button>
         </div>
       </div>
     </div>
