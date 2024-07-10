@@ -56,7 +56,7 @@ const NavBar = ({showLogin,setShowLogin}) => {
     }
   }, [user]);
 
-  const navbarClass = location.pathname === '/cart' ? 'navbar non-fixed-navbar' : showLogin==true?'navbar non-fixed-navbar':'navbar fixed-navbar';
+  const navbarClass = (location.pathname === '/cart' || location.pathname === '/order' ) ? 'navbar non-fixed-navbar' : showLogin==true?'navbar non-fixed-navbar':'navbar fixed-navbar';
 
   return (
     <div className={navbarClass}>
