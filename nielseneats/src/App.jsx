@@ -13,7 +13,7 @@ const App = () => {
   const [showLogin,setShowLogin]=useState(false)
 
   return (
-    <>
+    <div style={{ height: showLogin ? '100vh' : 'auto', overflow: showLogin ? 'hidden' : 'auto' }}>
 
     {showLogin?<LoginPopUp setShowLogin={setShowLogin}/>:<></>}
     
@@ -22,7 +22,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/dashboard' element={<Dashboard/>} />
-        <Route path='/cart' element={<Cart/>} />
+        <Route path='/cart' element={<Cart setShowLogin={setShowLogin}/>} />
         <Route path='/order' element={<PlaceOrder/>} />
 
       </Routes>
@@ -30,7 +30,7 @@ const App = () => {
 
     <Footer/>
 
-    </>
+    </div>
    
   )
 }
