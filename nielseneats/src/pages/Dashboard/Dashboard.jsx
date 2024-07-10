@@ -4,16 +4,21 @@ import './Dashboard.css';
 
 function Dashboard() {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
+  const [newCategoryName, setNewCategoryName] = useState('');
+  const [newCategoryImage, setNewCategoryImage] = useState('');
+  const [showNewCategoryForm, setShowNewCategoryForm] = useState(false);
   const [image, setImage] = useState('');
   const [editing, setEditing] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
 
   useEffect(() => {
     fetchProducts();
+    fetchCategories();
   }, []);
 
   const fetchProducts = async () => {
@@ -22,6 +27,17 @@ function Dashboard() {
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get('https://teamachievers-1.onrender.com/getmenulist', {
+        headers: { authentication: 'Bearer ' + localStorage.getItem('token') }
+      });
+      setCategories(response.data);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
     }
   };
 
@@ -36,6 +52,23 @@ function Dashboard() {
       clearForm();
     } catch (error) {
       console.error('Error adding product:', error);
+    }
+  };
+
+  const handleAddCategory = async (e) => {
+    e.preventDefault();
+    try {
+      const newCategory = { menu_name: newCategoryName, menu_image: newCategoryImage };
+      await axios.post('https://teamachievers-1.onrender.com/addcategory', newCategory, {
+        headers: { authentication: 'Bearer ' + localStorage.getItem('token') }
+      });
+      fetchCategories();
+      setCategory(newCategoryName);
+      setShowNewCategoryForm(false);
+      setNewCategoryName('');
+      setNewCategoryImage('');
+    } catch (error) {
+      console.error('Error adding category:', error);
     }
   };
 
@@ -81,6 +114,17 @@ function Dashboard() {
     setImage(product.image);
   };
 
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+    if (selectedCategory === "Add New Category") {
+      setShowNewCategoryForm(true);
+      setCategory("");
+    } else {
+      setShowNewCategoryForm(false);
+      setCategory(selectedCategory);
+    }
+  };
+
   return (
     <div className="dashboard">
       <h1>Dashboard</h1>
@@ -111,13 +155,36 @@ function Dashboard() {
             onChange={(e) => setPrice(e.target.value)}
             required
           />
-          <input
-            type="text"
-            placeholder="Category"
+          <select
             value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={handleCategoryChange}
             required
-          />
+          >
+            <option value="">Select Category</option>
+            {categories.map(cat => (
+              <option key={cat._id} value={cat.menu_name}>{cat.menu_name}</option>
+            ))}
+            <option value="Add New Category">Add New Category</option>
+          </select>
+          {showNewCategoryForm && (
+            <div className="new-category-form">
+              <input
+                type="text"
+                placeholder="New Category Name"
+                value={newCategoryName}
+                onChange={(e) => setNewCategoryName(e.target.value)}
+                required
+              />
+              <input
+                type="text"
+                placeholder="New Category Image URL"
+                value={newCategoryImage}
+                onChange={(e) => setNewCategoryImage(e.target.value)}
+                required
+              />
+              <button onClick={handleAddCategory}>Add Category</button>
+            </div>
+          )}
           <input
             type="text"
             placeholder="Image URL"

@@ -95,7 +95,6 @@ app.post('/prod', verifyToken, async (req, res) => {
 });
 
 //update product
-// update product
 app.put('/:id', (req, res) => {
     const { name, description, price, category, image } = req.body;
 
@@ -130,6 +129,17 @@ app.get('/getmenulist', async (req, res) => {
         res.status(500).send("Menu List not found");
     }
 });
+
+app.post('/addcategory', verifyToken, async (req, res) => {
+    try {
+      const { menu_name, menu_image } = req.body;
+      const newCategory = new MenuList({ menu_name, menu_image });
+      await newCategory.save();
+      res.status(201).json(newCategory);
+    } catch (error) {
+      res.status(500).send('Error adding category');
+    }
+  });  
 
 app.get('/userinfo', verifyToken, async (req, res) => {
     try {

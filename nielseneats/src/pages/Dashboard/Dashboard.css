@@ -1,69 +1,109 @@
 .dashboard {
-    padding: 20px;
-  }
-  
-  .new-dish-form, .dishes-list {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .new-dish-form h3, .dishes-list h3 {
-    margin-bottom: 15px;
-    font-size: 1.5em;
-  }
-  
-  .new-dish-form input, .dishes-list input {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .new-dish-form button, .dishes-list button {
-    display: inline-block;
-    width: calc(50% - 5px);
-    padding: 10px;
-    background: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-    margin: 5px 0;
-  }
-  
-  .new-dish-form button:hover, .dishes-list button:hover {
-    background: #218838;
-  }
-  
-  .dishes-list .dish-item {
-    padding: 15px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .dishes-list .dish-item span {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 1.2em;
-  }
-  
-  .dishes-list .dish-item button {
-    width: auto;
-    margin: 5px 5px 0 0;
-  }
-  
-  .dishes-list .dish-item button:nth-child(2) {
-    background: #dc3545;
-  }
-  
-  .dishes-list .dish-item button:nth-child(2):hover {
-    background: #c82333;
-  }
-  
+  padding: 20px;
+}
+
+.new-dish-form, .dishes-list {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.new-dish-form h3, .dishes-list h3 {
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+.new-dish-form input, .new-dish-form select, .dishes-list input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.new-dish-form select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #fff;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23000" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px 10px;
+}
+
+.new-dish-form button, .dishes-list button {
+  display: inline-block;
+  width: calc(50% - 5px);
+  padding: 10px;
+  background: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 5px 0;
+}
+
+.new-dish-form button:hover, .dishes-list button:hover {
+  background: #218838;
+}
+
+.dishes-list .dish-item {
+  padding: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.dishes-list .dish-item span {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.dishes-list .dish-item button {
+  width: auto;
+  margin: 5px 5px 0 0;
+}
+
+.dishes-list .dish-item button:nth-child(2) {
+  background: #dc3545;
+}
+
+.dishes-list .dish-item button:nth-child(2):hover {
+  background: #c82333;
+}
+
+.new-category-form {
+  margin-top: 10px;
+}
+
+.new-category-form input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.new-category-form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 10px;
+}
+
+.new-category-form button:hover {
+  background: #0056b3;
+}
