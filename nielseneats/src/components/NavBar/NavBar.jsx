@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './NavBar.css';
 import { assets } from '../../assets/assets';
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, useNavigate, useLocation} from 'react-router-dom'
 import { StoreContext } from '../../context/StoreContext';
 import axios from 'axios'; 
 
 const NavBar = ({setShowLogin}) => {
 
   const navigate = useNavigate();
-  
+  const location = useLocation();
+
   const [menu,setMenu]=useState("home");
 
   const {getTotalCartAmount}=useContext(StoreContext);
@@ -55,8 +56,11 @@ const NavBar = ({setShowLogin}) => {
     }
   }, [user]);
 
+  const navbarClass = location.pathname === '/cart' ? 'navbar non-fixed-navbar' : 'navbar fixed-navbar';
+
+
   return (
-    <div className="navbar">
+    <div className={navbarClass}>
       <Link to='/'><img src={assets.logo} alt="" className="logo" /></Link>
 
       <ul className='navbar-menu'>
