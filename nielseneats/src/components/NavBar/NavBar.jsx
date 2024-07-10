@@ -5,7 +5,7 @@ import {Link, useNavigate, useLocation} from 'react-router-dom'
 import { StoreContext } from '../../context/StoreContext';
 import axios from 'axios'; 
 
-const NavBar = ({setShowLogin}) => {
+const NavBar = ({showLogin,setShowLogin}) => {
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -56,8 +56,7 @@ const NavBar = ({setShowLogin}) => {
     }
   }, [user]);
 
-  const navbarClass = location.pathname === '/cart' ? 'navbar non-fixed-navbar' : 'navbar fixed-navbar';
-
+  const navbarClass = location.pathname === '/cart' ? 'navbar non-fixed-navbar' : showLogin==true?'navbar non-fixed-navbar':'navbar fixed-navbar';
 
   return (
     <div className={navbarClass}>

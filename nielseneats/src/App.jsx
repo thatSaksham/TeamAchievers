@@ -23,7 +23,7 @@ const App = () => {
     <div className='app'>
       <NavBar showLogin={showLogin} setShowLogin={setShowLogin}/>
       <Routes>
-        <Route path='/' element={<Home/>} />
+        <Route path='/' element={<Home showLogin={showLogin}/>} />
         <Route path='/dashboard' element={<Dashboard/>} />
         <Route path='/cart' element={<Cart setShowLogin={setShowLogin}/>} />
         <Route path='/order' element={<PlaceOrder/>} />
