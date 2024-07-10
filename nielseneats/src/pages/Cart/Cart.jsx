@@ -4,7 +4,7 @@ import { StoreContext } from '../../context/StoreContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Cart = () => {
+const Cart = ({setShowLogin}) => {
   const { cartItems, food_list, removeFromCart, addToCart, getTotalCartAmount } = useContext(StoreContext);
   const navigate = useNavigate();
   const [user,setUser]=useState({});
@@ -33,7 +33,7 @@ const handleCheckout = ()=>{
   if (user.username){
     (navigate('/order'));
   } else {
-    alert('Login to checkout')
+    setShowLogin(true);
   }
 }
 

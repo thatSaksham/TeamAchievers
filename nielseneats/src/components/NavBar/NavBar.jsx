@@ -34,19 +34,18 @@ const NavBar = ({setShowLogin}) => {
     }
   };
 
+  useEffect(() => {
+    if(token){
+      fetchUserDetails();
+    }
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     navigate('/');
     navigate(0);
   };
-  
-
-  useEffect(() => {
-    if(token){
-      fetchUserDetails();
-    }
-  }, []);
 
   useEffect(() => {
     if (user.username) {
