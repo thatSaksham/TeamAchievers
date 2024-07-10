@@ -34,7 +34,7 @@ const ExploreMenu=({category,setCategory})=> {
   }
 
   return (
-    <div className='explore-menu' id='explore-menu'>
+    <div className='explore-menu' id="explore-menu">
         <h1>Explore our menu</h1>
 
         <p className='explore-menu-text'>Dive into a world of culinary innovation with our chef's special creations, showcasing the finest seasonal ingredients sourced locally and globally.</p>
