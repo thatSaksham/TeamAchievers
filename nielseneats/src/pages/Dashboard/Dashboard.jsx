@@ -71,6 +71,7 @@ function Dashboard() {
   };
 
   const handleEditClick = (product) => {
+    window.scrollTo(0, 0)
     setEditing(true);
     setCurrentProduct(product);
     setName(product.name);
