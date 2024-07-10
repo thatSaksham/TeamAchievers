@@ -93,13 +93,15 @@ app.post('/prod', verifyToken, async (req, res) => {
 });
 
 //update product
+// update product
 app.put('/:id', (req, res) => {
-    const { name, description, price } = req.body;
+    const { name, description, price, category, image } = req.body;
 
-    Product.findByIdAndUpdate(req.params.id, { name, description, price })
+    Product.findByIdAndUpdate(req.params.id, { name, description, price, category, image })
         .then(product => res.json(product))
         .catch(err => console.log(err));
 });
+
 
 //delete product
 app.delete('/:id', (req, res) => {
