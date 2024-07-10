@@ -1,10 +1,22 @@
-.navbar{
+.fixed-navbar{
+    padding: 20px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 80%;
+    height: 15%;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+}
+
+.non-fixed-navbar{
     padding: 20px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
 .navbar .logo{
     height: 80px;
     width: 80px;
