@@ -4,7 +4,7 @@ import './LoginPopUp.css';
 import { assets } from '../../assets/assets';
 import axios from 'axios';
 
-const LoginPopUp = ({ setShowLogin }) => {
+const LoginPopUp = ({setShowLogin }) => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -25,21 +25,25 @@ const LoginPopUp = ({ setShowLogin }) => {
     };
 
     const handleRegisterData = async (event) => {
-        event.preventDefault();
-        try {
-            const response = await axios.post("https://teamachievers-1.onrender.com/register", {
-                username: username,
-                password: password,
-                email: email,
-            });
-            if (response.status === 201) {
-                setCurrentState("Login");
-                alert('User registered successfully!');
-            }
-        } catch (error) {
-            setError('Error creating user. Try again!'); // Updated error handling
-        }
-    };
+      event.preventDefault();
+      try {
+          const response = await axios.post("https://teamachievers-1.onrender.com/register", {
+              username: username,
+              password: password,
+              email: email,
+          });
+          if (response.status === 201) {
+              setCurrentState("Login");
+              alert('User registered successfully!');
+          }
+      } catch (error) {
+          if (error.response && error.response.status === 400) {
+              setError('Username or email already exists'); // Handle backend validation error
+          } else {
+              setError('Error creating user. Try again!'); // Handle other errors
+          }
+      }
+  };
 
     const handleLoginData = async (event) => {
         event.preventDefault();
@@ -52,6 +56,7 @@ const LoginPopUp = ({ setShowLogin }) => {
                 localStorage.setItem("token", res.data);
                 setShowLogin(false);
                 navigate('/');
+                navigate(0)
             }
         } catch (error) {
             setError('Invalid Credentials. Please try again!'); // Updated error handling
