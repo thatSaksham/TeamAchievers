@@ -84,7 +84,9 @@ app.post('/login', async (req, res) => {
 //add product
 app.post('/prod', verifyToken, async (req, res) => {
     try {
-        const prod = new Product({ name: req.body.name, description: req.body.description, price: req.body.price });
+        
+        const { name, description, price, category, image } = req.body;
+        const prod = new Product({ name, description, price, category, image });
         const p = await prod.save();
         res.status(201).json(p);
     } catch (error) {
