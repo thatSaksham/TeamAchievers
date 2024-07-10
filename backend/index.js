@@ -14,9 +14,9 @@ mongoose.connect(mongooseURI);
 
 //user Schema
 const UserSchema = new mongoose.Schema({
-    username: String,
+    username: { type: String, unique: true }, // Ensure username is unique
     password: String,
-    email: String,
+    email: { type: String, unique: true }, // Ensure email is unique
     isAdmin: Boolean,
 });
 const User = new mongoose.model('User', UserSchema);
@@ -53,8 +53,12 @@ function verifyToken(req, res, next) {
 //register
 app.post('/register', async (req, res) => {
     try {
+        const existingUser = await User.findOne({ $or: [{ username: req.body.username }, { email: req.body.email }] });
+        if (existingUser) {
+            return res.status(400).send('Username or email already exists');
+        }
         const hashedPass = bcrypt.hashSync(req.body.password, 8);
-        const user = new User({ username: req.body.username, password: hashedPass, email: req.body.email, isAdmin: false});
+        const user = new User({ username: req.body.username, password: hashedPass, email: req.body.email, isAdmin: false });
         await user.save();
         res.status(201).send("User registered successfully");
     } catch (error) {
@@ -66,15 +70,13 @@ app.post('/register', async (req, res) => {
 app.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ username: req.body.username });
-        if (user) {
-            if (bcrypt.compareSync(req.body.password, user.password)) {
-                const token = jwt.sign({ userId: user._id }, 'Your_Secret_Key');
-                res.json(token);
-            } else {
-                res.status(401).send("Invalid Credentials");
-            }
+        if (!user) return res.status(404).send('User Not Found');
+        
+        if (bcrypt.compareSync(req.body.password, user.password)) {
+            const token = jwt.sign({ userId: user._id }, 'Your_Secret_Key');
+            res.status(200).json(token);
         } else {
-            res.status(404).send('User Not Found');
+            res.status(401).send("Invalid Credentials");
         }
     } catch (error) {
         res.status(500).send('Error during login');
