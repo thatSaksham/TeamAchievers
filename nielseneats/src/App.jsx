@@ -7,8 +7,11 @@ import PlaceOrder from './pages/PlaceOrder/PlaceOrder'
 import Footer from './components/Footer/Footer'
 import LoginPopUp from './pages/LoginPopUp/LoginPopUp'
 import Dashboard from './pages/Dashboard/Dashboard'
+import useScrollToTop from './hooks/useScrollToTop.jsx'
 
 const App = () => {
+
+  useScrollToTop();
 
   const [showLogin,setShowLogin]=useState(false)
 
